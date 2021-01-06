@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "rebind_symbols_for_image:fishhook.c">
+      </ContextState>
+      <ContextState
+         contextName = "rebind_symbols:fishhook.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "_dyld_get_image_name(0)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "perform_rebinding_with_section:fishhook.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "symbol_name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "_rebind_symbols_for_image:fishhook.c">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
