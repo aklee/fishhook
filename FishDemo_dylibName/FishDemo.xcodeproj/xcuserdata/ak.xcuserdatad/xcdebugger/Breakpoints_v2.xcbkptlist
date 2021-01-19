@@ -15,9 +15,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "rebind_symbols(rebindings, rebindings_nel)"
-            landmarkType = "9">
+            endingLineNumber = "305">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -30,9 +28,9 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "perform_rebinding_with_section(rebindings, section, slide, symtab, strtab, indirect_symtab)"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,9 +44,9 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "perform_rebinding_with_section(rebindings, section, slide, symtab, strtab, indirect_symtab)"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,9 +61,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "_rebind_symbols_for_image(header, slide)"
-            landmarkType = "9">
+            endingLineNumber = "282">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,8 +74,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
@@ -95,9 +91,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "313"
-            endingLineNumber = "313"
-            landmarkName = "rebind_symbols(rebindings, rebindings_nel)"
-            landmarkType = "9">
+            endingLineNumber = "313">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,8 +104,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
@@ -126,9 +120,9 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "perform_rebinding_with_section(rebindings, section, slide, symtab, strtab, indirect_symtab)"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -222,56 +216,24 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
+            landmarkName = "rebind_symbols(rebindings, rebindings_nel)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "44BE0296-DA2E-46D1-864F-DD992F8A57B4"
+            uuid = "36DDD6B7-355F-4787-905A-A55D5CAEB353"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
-            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DB37BF14-8E91-4FF3-883F-42E97DB2951B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FishDemo/fishhook.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "301D1D28-5360-42E1-B571-BA355DF07475"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FishDemo/fishhook.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>

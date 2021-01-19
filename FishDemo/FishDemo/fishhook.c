@@ -120,7 +120,7 @@ static void perform_rebinding_with_section(struct rebindings_entry *rebindings,
                                            char *strtab,
                                            uint32_t *indirect_symtab) {
   const bool isDataConst = strcmp(section->segname, SEG_DATA_CONST) == 0;
-  uint32_t *indirect_symbol_indices = indirect_symtab + section->reserved1;//indices翻译“指标”
+  uint32_t *indirect_symbol_indices = indirect_symtab + section->reserved1;//indices翻译“指标”， segment内部的间接符号 在间接符号表中的开始索引
   void **indirect_symbol_bindings = (void **)((uintptr_t)slide + section->addr);
   vm_prot_t oldProtection = VM_PROT_READ;
   if (isDataConst) {
@@ -153,7 +153,7 @@ static void perform_rebinding_with_section(struct rebindings_entry *rebindings,
             
           if (cur->rebindings[j].replaced != NULL &&
               indirect_symbol_bindings[i] != cur->rebindings[j].replacement) {
-              //被替换的方法
+              //被替换的方法，将原方法的地址写回，外部orgi_NSLog地址就会变真实地址了。
             *(cur->rebindings[j].replaced) = indirect_symbol_bindings[i];
           }
             //my_NSLog地址写入间接符号表
@@ -180,6 +180,8 @@ static void perform_rebinding_with_section(struct rebindings_entry *rebindings,
   }
 }
 
+//basic_string(const char* __s, int __n);
+
 static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
                                      const struct mach_header *header,
                                      intptr_t slide) {
@@ -190,12 +192,12 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
 
   segment_command_t *cur_seg_cmd;
   segment_command_t *linkedit_segment = NULL;
-  segment_command_t *data_segment = NULL; //akak
+  segment_command_t *data_segment = NULL; //akak test
   struct symtab_command* symtab_cmd = NULL;
   struct dysymtab_command* dysymtab_cmd = NULL;
 
   uintptr_t cur = (uintptr_t)header + sizeof(mach_header_t);
-  for (uint i = 0; i < header->ncmds; i++, cur += cur_seg_cmd->cmdsize) {
+  for (uint i = 0; i < header->ncmds; i++, cur += cur_seg_cmd->cmdsize) {//遍历Load Commands
     cur_seg_cmd = (segment_command_t *)cur;
     //akak test
     if (cur_seg_cmd->cmd == LC_SEGMENT_ARCH_DEPENDENT) {
@@ -204,6 +206,16 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
       }
     }
     //end akak test
+    if (cur_seg_cmd->cmd == LC_LOAD_DYLIB && cur_seg_cmd->cmdsize == 88) {
+//        if (strcmp(cur_seg_cmd->segname, "CoreAudio") == 0) {
+        char string2[16];
+//        for (int i=0; i<16; i++) {
+////           printf("%s",cur_seg_cmd->segname[i]);
+//            //18000000020000003900740900000100
+//            printf("%02x",(int)cur_seg_cmd->segname[i]);
+//        }
+        printf("aaa %s", cur_seg_cmd->segname);
+    }
     if (cur_seg_cmd->cmd == LC_SEGMENT_ARCH_DEPENDENT) {
       if (strcmp(cur_seg_cmd->segname, SEG_LINKEDIT) == 0) {
         linkedit_segment = cur_seg_cmd;
@@ -225,7 +237,7 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
   // slide是虚拟基地址和编译基地址的偏移量
   // Find base symbol/string table addresses  寻找基地址，因为每次启动会变化的
   uintptr_t linkedit_base = (uintptr_t)slide + linkedit_segment->vmaddr - linkedit_segment->fileoff;
-  
+    
   // 经过测试，通过读取__Data段的数据，计算出来的基地址是一样的  linkedit_base = linkedit_base2, 但是不同的machofile 会偶现crash
   
   //之所以通过__LINKEDIT来计算基地址，怀疑是不是是因为__LINKEDIT的filesize和vmsize一定是一样的，因为这个段只是记录动态库加载的信息，而其他段可能出现filesize和vmsize不一样的情况。
@@ -240,6 +252,7 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
   uint32_t *indirect_symtab = (uint32_t *)(linkedit_base + dysymtab_cmd->indirectsymoff);
 
   cur = (uintptr_t)header + sizeof(mach_header_t);
+  // 遍历LoadCommand， 即遍历LC_Segment命令
   for (uint i = 0; i < header->ncmds; i++, cur += cur_seg_cmd->cmdsize) {
     cur_seg_cmd = (segment_command_t *)cur;
     if (cur_seg_cmd->cmd == LC_SEGMENT_ARCH_DEPENDENT) {
@@ -247,6 +260,7 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
           strcmp(cur_seg_cmd->segname, SEG_DATA_CONST) != 0) {
         continue;
       }
+      // 遍历Section
       for (uint j = 0; j < cur_seg_cmd->nsects; j++) {
         section_t *sect =
           (section_t *)(cur + sizeof(segment_command_t)) + j;
@@ -295,7 +309,7 @@ int rebind_symbols(struct rebinding rebindings[], size_t rebindings_nel) {
     uint32_t c = _dyld_image_count();
     for (uint32_t i = 0; i < c; i++) {
         const char *name = _dyld_get_image_name(0);
-        printf("%s", name);
+        printf("%s", name);//akak print macho
       _rebind_symbols_for_image(_dyld_get_image_header(i), _dyld_get_image_vmaddr_slide(i));
     }
   }

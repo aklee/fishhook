@@ -29,8 +29,8 @@ void my_NSLog(NSString *format, ...)
 //    rebind_symbols((struct rebinding[1]){{"NSLog", my_NSLog, (void *)&orgi_NSLog}}, 1);
 //    rebind_symbols((struct rebinding[2]){{"close", my_close, (void *)&orig_close}, {"open", my_open, (void *)&orig_open}}, 2);
     delegate = self;
-    hookStart();
-//    NSLog(@"Hello world");
+//    hookStart();
+    NSLog(@"Hello world");
     return YES;
 }
 
