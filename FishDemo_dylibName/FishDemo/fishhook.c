@@ -61,11 +61,13 @@ static int prepend_rebindings(struct rebindings_entry **rebindings_head,
   }
   new_entry->rebindings = malloc(sizeof(struct rebinding) * nel);
   if (!new_entry->rebindings) {
+    //申请失败
     free(new_entry);
     return -1;
   }
   new_entry->dylib_ordinals = malloc(sizeof(uint8_t) * nel);
   if (!new_entry->dylib_ordinals) {
+    //申请失败
     free(new_entry->rebindings);
     free(new_entry);
     return -1;
@@ -146,7 +148,8 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
         }
         struct dylib_command *dylib_cmd = (struct dylib_command *)cur_load_cmd;
         char *dylib = (char *)(cur + dylib_cmd->dylib.name.offset);
-        printf("%s", dylib);//akak 输出动态库名称
+    
+        printf("%s\n", dylib);//akak 输出动态库名称
         for (struct rebindings_entry *entry = rebindings; entry != NULL; entry = entry->next) {
           for (int el = 0; el < entry->rebindings_nel; ++el) {
             struct rebinding *cur_rebinding = &entry->rebindings[el];

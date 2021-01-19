@@ -21,15 +21,18 @@ void my_NSLog(NSString *format, ...)
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    rebind_symbols((struct rebinding[1]){{"NSLog", my_NSLog, (void *)&orgi_NSLog}}, 1);// 传入的是orgi_NSLog的地址指针，在替换完成后会将orgi_NSLog地址写回变量中
+    // 源码参考地址：https://chromium.googlesource.com/external/github.com/facebook/fishhook/
     
-    //rebind_symbols((struct rebinding[1]){{"NSLog", my_NSLog, nil}}, 1);//效果相同，因为fishhook内部没有对orgi_NSLog做判断，只要方法名和my_NSLog存在就可以完成替换，但是orgi_NSLog就不会被更新了
+    //指定动态库名称
+    // 失败，需要匹配动态库路径
+    //    rebind_symbols((struct rebinding[1]){{"NSLog", "Foundation", my_NSLog, (void *)&orgi_NSLog}}, 1);
+    // 失败，不匹配
+    //    rebind_symbols((struct rebinding[1]){{"NSLog", my_NSLog, (void *)&orgi_NSLog}}, 1);
+    // 成功hook
+    rebind_symbols((struct rebinding[1]){{"NSLog", "/System/Library/Frameworks/Foundation.framework/Foundation", my_NSLog, (void *)&orgi_NSLog}}, 1);
     
-//    rebind_symbols((struct rebinding[1]){{"NSLog", my_NSLog, (void *)&orgi_NSLog}}, 1);
-//    rebind_symbols((struct rebinding[2]){{"close", my_close, (void *)&orig_close}, {"open", my_open, (void *)&orig_open}}, 2);
     delegate = self;
-//    hookStart();
+    //    hookStart();
     NSLog(@"Hello world");
     return YES;
 }
@@ -69,13 +72,13 @@ int cur = 0;
 void pre_objc_msgSend(id self, SEL _cmd, uintptr_t lr) {
     @synchronized (delegate) {
         printf("pre action...\n");
-      // 做一个简单对测试，输出 ObjC 方法名
+        // 做一个简单对测试，输出 ObjC 方法名
         printf("\t%s\n", object_getClassName(self));
-    //    printf("\t%s\n", _cmd);
+        //    printf("\t%s\n", _cmd);
         l_ptr_t[cur ++] = lr;
     }
 }
- 
+
 uintptr_t post_objc_msgSend() {
     @synchronized (delegate) {
         printf("post action...\n");
@@ -93,16 +96,16 @@ static void hook_Objc_msgSend() {
     
     // 将 lr 传入 x2 用于 pre_objc_msgSend 传参
     __asm volatile ("mov x2, lr\n");
-
+    
     // 调用 pre_objc_msgSend
     call(&pre_objc_msgSend)
-
+    
     // 还原上下文
     load()
     
     // 调用 objc_msgSend 原方法
     call(orig_objc_msgSend)
-//    call(objc_msgSend)
+    //    call(objc_msgSend)
     
     // 记录上下文
     save()
@@ -128,13 +131,13 @@ void hookStart() {
     dispatch_once(&onceToken, ^{
         rebind_symbols((struct rebinding[6]){
             {
-       "objc_msgSend",
-       (void *)hook_Objc_msgSend,
-       (void **)&orig_objc_msgSend
-//                (void **)&objc_msgSend
-      },
+                "objc_msgSend",
+                (void *)hook_Objc_msgSend,
+                (void **)&orig_objc_msgSend
+                //                (void **)&objc_msgSend
+            },
         }, 1);
-          
+        
     });
 }
 

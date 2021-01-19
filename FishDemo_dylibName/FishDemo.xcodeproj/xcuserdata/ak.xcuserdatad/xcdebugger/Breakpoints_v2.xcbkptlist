@@ -28,8 +28,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
@@ -44,8 +44,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
@@ -74,8 +74,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
@@ -104,8 +104,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
@@ -120,8 +120,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
@@ -136,8 +136,8 @@
             filePath = "FishDemo/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "hook_Objc_msgSend()"
             landmarkType = "9">
          </BreakpointContent>
@@ -152,8 +152,8 @@
             filePath = "FishDemo/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "hook_Objc_msgSend()"
             landmarkType = "9">
          </BreakpointContent>
@@ -168,8 +168,8 @@
             filePath = "FishDemo/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "pre_objc_msgSend(self, lr)"
             landmarkType = "9">
          </BreakpointContent>
@@ -184,8 +184,8 @@
             filePath = "FishDemo/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "post_objc_msgSend()"
             landmarkType = "9">
          </BreakpointContent>
@@ -200,8 +200,8 @@
             filePath = "FishDemo/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "hook_Objc_msgSend()"
             landmarkType = "9">
          </BreakpointContent>
@@ -216,8 +216,8 @@
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "rebind_symbols(rebindings, rebindings_nel)"
             landmarkType = "9">
          </BreakpointContent>
@@ -226,14 +226,46 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "36DDD6B7-355F-4787-905A-A55D5CAEB353"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FishDemo/fishhook.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73E5E24F-8D21-4AAF-B67F-8D12EC2ECE67"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FishDemo/fishhook.c"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "75D349AD-0600-4428-84F7-AE058C952199"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishDemo/fishhook.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "rebind_symbols_for_image(rebindings, header, slide)"
             landmarkType = "9">
          </BreakpointContent>
