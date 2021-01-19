@@ -61,6 +61,13 @@ int rebind_symbols_image(void *header,
                          intptr_t slide,
                          struct rebinding rebindings[],
                          size_t rebindings_nel);
+
+
+
+FISHHOOK_VISIBILITY
+int has_dylib_name(char *name);
+
+
 #ifdef __cplusplus
 }
 #endif //__cplusplus

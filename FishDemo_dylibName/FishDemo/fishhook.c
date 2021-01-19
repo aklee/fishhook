@@ -148,7 +148,7 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
         }
         struct dylib_command *dylib_cmd = (struct dylib_command *)cur_load_cmd;
         char *dylib = (char *)(cur + dylib_cmd->dylib.name.offset);
-    
+        
         printf("%s\n", dylib);//akak 输出动态库名称
         for (struct rebindings_entry *entry = rebindings; entry != NULL; entry = entry->next) {
           for (int el = 0; el < entry->rebindings_nel; ++el) {
@@ -214,7 +214,7 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
       }
       for (uint j = 0; j < seg_cmd->nsects; j++) {
         section_t *sect =
-          (section_t *)(cur + sizeof(segment_command_t)) + j;
+        (section_t *)(cur + sizeof(segment_command_t)) + j;
         if ((sect->flags & SECTION_TYPE) == S_LAZY_SYMBOL_POINTERS) {
           perform_rebinding_with_section(rebindings, sect, slide, symtab, strtab, indirect_symtab);
         }
@@ -227,17 +227,17 @@ static void rebind_symbols_for_image(struct rebindings_entry *rebindings,
 }
 static void _rebind_symbols_for_image(const struct mach_header *header,
                                       intptr_t slide) {
-    rebind_symbols_for_image(_rebindings_head, header, slide);
+  rebind_symbols_for_image(_rebindings_head, header, slide);
 }
 int rebind_symbols_image(void *header,
                          intptr_t slide,
                          struct rebinding rebindings[],
                          size_t rebindings_nel) {
-    struct rebindings_entry *rebindings_head = NULL;
-    int retval = prepend_rebindings(&rebindings_head, rebindings, rebindings_nel);
-    rebind_symbols_for_image(rebindings_head, header, slide);
-    free(rebindings_head);
-    return retval;
+  struct rebindings_entry *rebindings_head = NULL;
+  int retval = prepend_rebindings(&rebindings_head, rebindings, rebindings_nel);
+  rebind_symbols_for_image(rebindings_head, header, slide);
+  free(rebindings_head);
+  return retval;
 }
 int rebind_symbols(struct rebinding rebindings[], size_t rebindings_nel) {
   int retval = prepend_rebindings(&_rebindings_head, rebindings, rebindings_nel);
@@ -256,3 +256,4 @@ int rebind_symbols(struct rebinding rebindings[], size_t rebindings_nel) {
   }
   return retval;
 }
+

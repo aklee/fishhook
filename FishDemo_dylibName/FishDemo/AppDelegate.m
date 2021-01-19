@@ -6,10 +6,15 @@
 //
 
 #import "AppDelegate.h"
-#import "fishhook.h"
 #import <objc/message.h>
+#import "fishhook.h"
+#import "GTDylibCheck.h"
+//#import <CoreLocation/CLLocationManager.h>
 @interface AppDelegate ()
 
+@end
+@interface dddd : NSObject
+@property (nonatomic, readonly) int accuracyAuthorization;
 @end
 
 @implementation AppDelegate
@@ -29,119 +34,35 @@ void my_NSLog(NSString *format, ...)
     // 失败，不匹配
     //    rebind_symbols((struct rebinding[1]){{"NSLog", my_NSLog, (void *)&orgi_NSLog}}, 1);
     // 成功hook
-    rebind_symbols((struct rebinding[1]){{"NSLog", "/System/Library/Frameworks/Foundation.framework/Foundation", my_NSLog, (void *)&orgi_NSLog}}, 1);
-    
+//    rebind_symbols((struct rebinding[1]){{"NSLog", "/System/Library/Frameworks/Foundation.framework/Foundation", my_NSLog, (void *)&orgi_NSLog}}, 1);
+  
+    // 检查app是否在Build Phase -> Link Binary With Libraries接入动态库
+    int ret = gt_has_dylib_name("/System/Library/Frameworks/Foundation.framework/Foundation");
+    NSLog(@"has_dylib_name %@",@(ret));
+    ret = gt_has_dylib_name("/System/Library/Frameworks/CoreLocation.framework/CoreLocation");
+    NSLog(@"has_dylib_name %@",@(ret));
+    [self checkRuntime];
     delegate = self;
-    //    hookStart();
     NSLog(@"Hello world");
     return YES;
 }
 
-#if TARGET_IPHONE_SIMULATOR
-void hookStart() {
-    //需真机
-}
-#else
-
-#define call(value) \
-__asm volatile ("stp x8, x9, [sp, #-16]!\n"); \
-__asm volatile ("mov x12, %0\n" :: "r"(value)); \
-__asm volatile ("ldp x8, x9, [sp], #16\n"); \
-__asm volatile ("blr x12\n");
-
-#define save() \
-__asm volatile ( \ 
-"stp x8, x9, [sp, #-16]!\n" \
-"stp x6, x7, [sp, #-16]!\n" \
-"stp x4, x5, [sp, #-16]!\n" \
-"stp x2, x3, [sp, #-16]!\n" \
-"stp x0, x1, [sp, #-16]!\n");
-
-#define load() \
-__asm volatile ( \
-"ldp x0, x1, [sp], #16\n" \
-"ldp x2, x3, [sp], #16\n" \
-"ldp x4, x5, [sp], #16\n" \
-"ldp x6, x7, [sp], #16\n" \
-"ldp x8, x9, [sp], #16\n" );
-
-__unused static id (*orig_objc_msgSend)(id, SEL, ...);
-
-uintptr_t l_ptr_t[10000];
-int cur = 0;
-void pre_objc_msgSend(id self, SEL _cmd, uintptr_t lr) {
-    @synchronized (delegate) {
-        printf("pre action...\n");
-        // 做一个简单对测试，输出 ObjC 方法名
-        printf("\t%s\n", object_getClassName(self));
-        //    printf("\t%s\n", _cmd);
-        l_ptr_t[cur ++] = lr;
-    }
+// 运行时中引入dylib，has_dylib_name 检测不到。 has_dylib_name只会检测当前app可执行文件中动态库列表
+- (void)checkRuntime {
+  // 运行时添加动态库，macho中loadCommands中不会有CoreLocation这个动态库的引入
+  Class cls = NSClassFromString(@"CLLocationManager");
+  dddd *test = [cls new];
+    NSLog(@"%@",@([test accuracyAuthorization]));
+    
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4), dispatch_get_main_queue(), ^{
+      // 检查app是否接入动态库
+      int ret = gt_has_dylib_name("/System/Library/Frameworks/Foundation.framework/Foundation");
+      NSLog(@"has_dylib_name %@",@(ret));//1
+      ret = gt_has_dylib_name("/System/Library/Frameworks/CoreLocation.framework/CoreLocation");
+      NSLog(@"has_dylib_name %@",@(ret));//0
+  });
 }
 
-uintptr_t post_objc_msgSend() {
-    @synchronized (delegate) {
-        printf("post action...\n");
-        if (cur != 0) {
-            cur --;
-        }
-        return l_ptr_t[cur];
-    }
-}
-
-__attribute__((__naked__))
-static void hook_Objc_msgSend() {
-    // 记录上下文
-    save()
-    
-    // 将 lr 传入 x2 用于 pre_objc_msgSend 传参
-    __asm volatile ("mov x2, lr\n");
-    
-    // 调用 pre_objc_msgSend
-    call(&pre_objc_msgSend)
-    
-    // 还原上下文
-    load()
-    
-    // 调用 objc_msgSend 原方法
-    call(orig_objc_msgSend)
-    //    call(objc_msgSend)
-    
-    // 记录上下文
-    save()
-    
-    // 调用 post_objc_msgSend
-    call(&post_objc_msgSend)
-    
-    // 还原 lr
-    __asm volatile ("mov lr, x0\n");
-    
-    // 还原上下文
-    load()
-    
-    // return
-    __asm volatile ("ret\n");
-}
-
-
-// 启动Hook 入口
-void hookStart() {
-    static dispatch_once_t onceToken;
-    orig_objc_msgSend = objc_msgSend;
-    dispatch_once(&onceToken, ^{
-        rebind_symbols((struct rebinding[6]){
-            {
-                "objc_msgSend",
-                (void *)hook_Objc_msgSend,
-                (void **)&orig_objc_msgSend
-                //                (void **)&objc_msgSend
-            },
-        }, 1);
-        
-    });
-}
-
-#endif
 #pragma mark - UISceneSession lifecycle
 
 

@@ -15,8 +15,8 @@
 		41057C7225A2E93B009F6C12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41057C7025A2E93B009F6C12 /* LaunchScreen.storyboard */; };
 		41057C7525A2E93B009F6C12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41057C7425A2E93B009F6C12 /* main.m */; };
 		41057C8325A2E9E2009F6C12 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 41057C8225A2E9E2009F6C12 /* fishhook.c */; };
+		412CA78B25B6B49C00AC3432 /* GTDylibCheck.c in Sources */ = {isa = PBXBuildFile; fileRef = 412CA78A25B6B49C00AC3432 /* GTDylibCheck.c */; };
 		41822BDD25B587DA0090B56D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41822BDC25B587DA0090B56D /* CoreAudio.framework */; };
-		41822BDF25B587E10090B56D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41822BDE25B587E10090B56D /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +34,8 @@
 		41057C7425A2E93B009F6C12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		41057C8125A2E9E2009F6C12 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
 		41057C8225A2E9E2009F6C12 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		412CA78925B6B49C00AC3432 /* GTDylibCheck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTDylibCheck.h; sourceTree = "<group>"; };
+		412CA78A25B6B49C00AC3432 /* GTDylibCheck.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GTDylibCheck.c; sourceTree = "<group>"; };
 		41822BDC25B587DA0090B56D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		41822BDE25B587E10090B56D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -43,7 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41822BDF25B587E10090B56D /* CoreLocation.framework in Frameworks */,
 				41822BDD25B587DA0090B56D /* CoreAudio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +74,8 @@
 			children = (
 				41057C8125A2E9E2009F6C12 /* fishhook.h */,
 				41057C8225A2E9E2009F6C12 /* fishhook.c */,
+				412CA78925B6B49C00AC3432 /* GTDylibCheck.h */,
+				412CA78A25B6B49C00AC3432 /* GTDylibCheck.c */,
 				41057C6225A2E939009F6C12 /* AppDelegate.h */,
 				41057C6325A2E939009F6C12 /* AppDelegate.m */,
 				41057C6525A2E939009F6C12 /* SceneDelegate.h */,
@@ -170,6 +173,7 @@
 				41057C6425A2E939009F6C12 /* AppDelegate.m in Sources */,
 				41057C7525A2E93B009F6C12 /* main.m in Sources */,
 				41057C8325A2E9E2009F6C12 /* fishhook.c in Sources */,
+				412CA78B25B6B49C00AC3432 /* GTDylibCheck.c in Sources */,
 				41057C6725A2E939009F6C12 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
